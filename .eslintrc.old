@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "prettier"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+      "ecmaVersion": 2017
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/leetbot/**/*",
+        "src/leetbot/*",
+      ],
+      "env": {
+        "node": true
+      },
+      "rules": {
+
+      }
+    },
+  ],
+}
