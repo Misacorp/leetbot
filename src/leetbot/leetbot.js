@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
 import handleEmoji from './handleEmoji';
-import emojis, { getEmojis } from './emoji/emojis';
+import { getEmojis } from './emoji/emojis';
 
 import leetHandler from './messageHandlers/leetHandler';
 
@@ -15,4 +15,4 @@ client.on('message', msg => {
   handleEmoji(msg, 'leet', message => leetHandler(message));
 });
 
-client.login('NjM1MDIwNTc3MjExNDE2NTc2.Xaq_9g.uAmJqCoDPqR8D3qiqYqWhIBhRjY');
+client.login(process.env.DISCORD_TOKEN);
