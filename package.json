@@ -45,7 +45,8 @@
     "moment-timezone": "^0.5.27",
     "morgan": "^1.9.1",
     "pug": "^2.0.3",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "sqlite3": "^4.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
