@@ -1,8 +1,5 @@
 import emojis from '../emoji/emojis';
-import timeBetween from '../util/timeBetween';
-
-const leetStart = new Date().setHours(13, 37, 0);
-const leetEnd = new Date().setHours(13, 38, 0);
+import isLeet from '../isLeet';
 
 /**
  * Checks if the message was created at 13:37 Finnish time and performs
@@ -11,7 +8,9 @@ const leetEnd = new Date().setHours(13, 38, 0);
  */
 const leetHandler = msg => {
   const { createdAt } = msg;
-  if (timeBetween(createdAt, leetStart, leetEnd)) {
+  if (isLeet(createdAt)) {
+    // Save an entry to our database's messages table with type 'LEET'
+
     msg.react(emojis.leet.id);
   } else {
     msg.react(emojis.leeb.id);

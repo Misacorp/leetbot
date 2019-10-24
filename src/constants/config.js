@@ -1,2 +1,2 @@
-/* eslint-disable import/prefer-default-export */
 export const TIMEZONE = 'Europe/Helsinki';
+export const POLLER_INTERVAL = 3000;
