@@ -39,14 +39,14 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "better-sqlite3": "^5.4.3",
     "body-parser": "^1.18.2",
     "discord.js": "^11.5.1",
     "express": "^4.16.4",
     "moment-timezone": "^0.5.27",
     "morgan": "^1.9.1",
     "pug": "^2.0.3",
-    "rimraf": "^2.6.3",
-    "sqlite3": "^4.1.0"
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

@@ -1,35 +1,26 @@
-import sqlite3 from 'sqlite3';
+import Database from 'better-sqlite3';
 
-sqlite3.verbose();
 let db;
+console.log('db file checking in', db);
 
 const database = {
   /**
-   * Open a database connection in a file.
+   * Open a database connection in a file if one does not already exist.
+   * @param {string} path Path to database file.
    */
   open: (path = `${__dirname}/leet.db`) => {
-    return new Promise((resolve, reject) => {
-      db = new sqlite3.Database(path, err => {
-        if (err) {
-          reject(err);
-        }
-        resolve(true);
-      });
-    });
+    if (!db) {
+      console.log('Creating new database at', path);
+      db = new Database(path, { verbose: console.log });
+    }
+    return db;
   },
 
   /**
    * Close database connection.
    */
   close: () => {
-    return new Promise((resolve, reject) => {
-      db.close(err => {
-        if (err) {
-          reject(err);
-        }
-      });
-      resolve(true);
-    });
+    db.close();
   },
 
   /**
