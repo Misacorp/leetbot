@@ -10,8 +10,8 @@ const debugHandler = msg => {
     //   }
     //   rows.forEach(r => console.log(r));
     // });
+    msg.react('✅');
   }
-  msg.react('✅');
 };
 
 export default debugHandler;
