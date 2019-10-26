@@ -63,3 +63,7 @@ typings/
 # Custom
 .idea
 dist
+
+# Database
+src/leetbot/database/*.db
+src/leetbot/database/*.db*
