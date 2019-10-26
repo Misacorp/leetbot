@@ -1,4 +1,5 @@
 import Database from 'better-sqlite3';
+import init from './init';
 
 let db;
 console.log('db file checking in', db);
@@ -27,14 +28,6 @@ const database = {
    * Database instance
    */
   getDB: () => db,
-
-  /**
-   * Create tables etc.
-   */
-  init: () => {
-    db.run('CREATE TABLE IF NOT EXISTS messages(author text)');
-    console.log('Created tables');
-  },
 };
 
 export default database;

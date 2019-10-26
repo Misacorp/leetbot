@@ -40,6 +40,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "better-sqlite3": "^5.4.3",
+    "better-sqlite3-helper": "^2.1.1",
     "body-parser": "^1.18.2",
     "discord.js": "^11.5.1",
     "express": "^4.16.4",
