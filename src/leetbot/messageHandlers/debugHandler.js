@@ -1,4 +1,6 @@
 import DB from 'better-sqlite3-helper';
+import User from '../classes/User';
+import addUser from '../database/queries/addUser';
 
 /**
  * Used for testing and debugging messages.
@@ -12,11 +14,10 @@ const debugHandler = msg => {
       name: msg.guild.name,
     });
 
-    DB().replace('users', {
-      id: msg.author.id,
-      name: msg.author.tag,
-      avatarUrl: msg.author.displayAvatarURL,
-    });
+    const { author } = msg;
+    const { id, tag, displayAvatarUrl } = author;
+    const user = new User(id, tag, displayAvatarUrl);
+    addUser(user);
 
     DB().insert('messages', {
       id: msg.id,
@@ -24,6 +25,7 @@ const debugHandler = msg => {
       userId: msg.author.id,
       serverId: msg.guild.id,
     });
+
     msg.react('✅');
   }
 
