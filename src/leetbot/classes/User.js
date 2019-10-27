@@ -28,7 +28,6 @@ class User {
     if (avatarUrl && typeof avatarUrl !== 'string') {
       throw new TypeError(`An avatar URL must be of type string. ${typeof avatarUrl} was given.`);
     }
-
     this.avatarUrl = avatarUrl;
   }
 }

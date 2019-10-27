@@ -16,8 +16,8 @@ const parseMessage = (msg, type = 'OTHER') => {
 
   // Get user.
   const { author } = msg;
-  const { id: userId, tag, displayAvatarUrl } = author;
-  const user = new User(userId, tag, displayAvatarUrl);
+  const { id: userId, tag, displayAvatarURL } = author;
+  const user = new User(userId, tag, displayAvatarURL);
 
   // Get message.
   const message = new Message(msg.id, userId, serverId, type, msg.createdAt);
