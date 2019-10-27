@@ -31,15 +31,22 @@ describe('Message', () => {
 
   it('does not allow a message with an unsupported type to be created', () => {
     expect(() => {
-      return new Message('1234567890', '88888888', '00000000', 'THIS_TYPE_IS_NOT_SUPPORTED');
+      return new Message('1234567890', '88888888', '00000000', 'THIS_TYPE_IS_NOT_SUPPORTED', new Date());
+    }).toThrow();
+  });
+
+  it('does not allow a message without a createdAt property to be created', () => {
+    expect(() => {
+      return new Message('1234567890', '88888888', '00000000', messageTypes[0]);
     }).toThrow();
   });
 
   it('creates a message successfully', () => {
-    const message = new Message('1234567890', '88888888', '00000000', messageTypes[0]);
+    const message = new Message('1234567890', '88888888', '00000000', messageTypes[0], new Date());
     expect(message).toHaveProperty('id');
     expect(message).toHaveProperty('userId');
     expect(message).toHaveProperty('serverId');
     expect(message).toHaveProperty('type');
+    expect(message).toHaveProperty('createdAt');
   });
 });

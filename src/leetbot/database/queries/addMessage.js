@@ -13,15 +13,12 @@ const addMessage = message => {
   }
 
   const stmt = DB().prepare(
-    `INSERT OR REPLACE INTO messages (id, userId, serverId, type) 
-      VALUES ( $id,
-               COALESCE((SELECT userId FROM messages WHERE id = $id), $userId),
-               COALESCE((SELECT serverId FROM messages WHERE id = $id), $serverId),
-               COALESCE((SELECT type FROM messages WHERE id = $id), $type)
-      );`,
+    `INSERT INTO messages (id, userId, serverId, type, createdAt) 
+      VALUES ( $id, $userId, $serverId, $type, $createdAt);`,
   );
 
-  stmt.run({ ...message });
+  // Message createdAt is converted to an ISO string
+  stmt.run({ ...message, createdAt: message.createdAt.toISOString() });
 };
 
 export default addMessage;

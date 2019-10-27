@@ -17,6 +17,7 @@ CREATE TABLE 'messages' (
   userId INTEGER NOT NULL,
   serverId INTEGER NOT NULL,
   type TEXT,
+  createdAt TEXT NOT NULL,
   FOREIGN KEY (userId) REFERENCES users (id),
   FOREIGN KEY (serverId) REFERENCES servers (id)
 );
