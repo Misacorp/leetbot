@@ -2,7 +2,8 @@
 PRAGMA foreign_keys = ON;
 CREATE TABLE 'servers' (
   id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL
+  name TEXT NOT NULL,
+  iconUrl TEXT
 );
 
 CREATE TABLE 'users' (

@@ -13,6 +13,7 @@ const addUser = user => {
   }
   console.log('(TODO) Adding user to database');
 
+  // Change to upsert statement
   DB().replace('users', user);
 };
 
