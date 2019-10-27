@@ -11,10 +11,16 @@ const addUser = user => {
   if (!(user instanceof User)) {
     throw new TypeError('Cannot add user that is not an instance of User to database.');
   }
-  console.log('(TODO) Adding user to database');
 
-  // Change to upsert statement
-  DB().replace('users', user);
+  const stmt = DB().prepare(
+    `INSERT OR REPLACE INTO users (id, name, avatarUrl) 
+      VALUES ( $id, 
+               COALESCE((SELECT name FROM users WHERE id = $id), $name),
+               COALESCE((SELECT avatarUrl FROM users WHERE id = $id), $avatarUrl)
+      );`,
+  );
+
+  stmt.run({ ...user });
 };
 
 export default addUser;

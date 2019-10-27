@@ -31,6 +31,14 @@ class Server {
 
     this.iconUrl = iconUrl;
   }
+
+  toString() {
+    return {
+      id: this.id,
+      name: this.name,
+      iconUrl: this.iconUrl,
+    };
+  }
 }
 
 export default Server;
