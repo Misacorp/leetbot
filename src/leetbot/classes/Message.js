@@ -1,6 +1,6 @@
 import validateString from '../util/validators/validateString';
 
-const types = ['LEET', 'FAILED_LEET', 'LEEB', 'OTHER'];
+export const messageTypes = ['LEET', 'FAILED_LEET', 'LEEB', 'OTHER'];
 
 /**
  * Represents a Discord message.
@@ -36,9 +36,9 @@ class Message {
 
     try {
       validateString(type);
-      if (!types.includes(type)) {
+      if (!messageTypes.includes(type)) {
         throw new Error(
-          `Invalid message type supplied to Message constructor. Expected one of ${types} but got ${type}`,
+          `Invalid message type supplied to Message constructor. Expected one of ${messageTypes} but got ${type}`,
         );
       }
       this.type = type;

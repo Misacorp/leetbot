@@ -1,4 +1,4 @@
-import Message from './Message';
+import Message, { messageTypes } from './Message';
 
 describe('Message', () => {
   it('does not allow a message without an id to be created', () => {
@@ -9,20 +9,37 @@ describe('Message', () => {
     expect(() => new Message('')).toThrow();
   });
 
-  it('does not allow a message with no name to be created', () => {
+  it('does not allow a message without a userId to be created', () => {
     expect(() => new Message('1234567890')).toThrow();
   });
 
-  it('creates a message successfully', () => {
-    const message = new Message('1234567899', 'The Leeb');
-    expect(message).toHaveProperty('id');
-    expect(message).toHaveProperty('name');
+  it('does not allow a message with an empty userId to be created', () => {
+    expect(() => new Message('1234567890', '')).toThrow();
   });
 
-  it('creates a Message with an avatar succesfully', () => {
-    const message = new Message('1234567899', 'The Leeb place', 'https://domain.net/icon.jpg');
+  it('does not allow a message without an serverId to be created', () => {
+    expect(() => new Message('12345667890', '88888888')).toThrow();
+  });
+
+  it('does not allow a message with an empty serverId to be created', () => {
+    expect(() => new Message('1234567890', '88888888', '')).toThrow();
+  });
+
+  it('does not allow a message with no type to be created', () => {
+    expect(() => new Message('1234567890', '88888888', '00000000')).toThrow();
+  });
+
+  it('does not allow a message with an unsupported type to be created', () => {
+    expect(() => {
+      return new Message('1234567890', '88888888', '00000000', 'THIS_TYPE_IS_NOT_SUPPORTED');
+    }).toThrow();
+  });
+
+  it('creates a message successfully', () => {
+    const message = new Message('1234567890', '88888888', '00000000', messageTypes[0]);
     expect(message).toHaveProperty('id');
-    expect(message).toHaveProperty('name');
-    expect(message).toHaveProperty('iconUrl');
+    expect(message).toHaveProperty('userId');
+    expect(message).toHaveProperty('serverId');
+    expect(message).toHaveProperty('type');
   });
 });
