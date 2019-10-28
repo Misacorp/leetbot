@@ -13,9 +13,17 @@ const debugHandler = msg => {
   const { server, user, message } = parseMessage(msg, 'OTHER');
 
   // Add rows to database tables.
-  addServer(server);
-  addUser(user);
-  addMessage(message);
+  try {
+    addServer(server);
+    addUser(user);
+    addMessage(message);
+  } catch (e) {
+    console.log('The following error occurred when attempting to add these items to the database');
+    console.log('Server:', server);
+    console.log('User:', user);
+    console.log('Message:', message);
+    console.error(e);
+  }
 
   if (msg.channel.name === 'bot') {
     msg.react('✅');
