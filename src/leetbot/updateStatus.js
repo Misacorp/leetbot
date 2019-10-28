@@ -6,7 +6,7 @@ const MINUTE_BEFORE = 'MINUTE_BEFORE';
 const LEET = 'LEET';
 const LEEB = 'LEEB';
 const DEFAULT = 'DEFAULT';
-let lastStatus = DEFAULT;
+let lastStatus = '';
 
 /**
  * Updates the status of the bot based on the current time.

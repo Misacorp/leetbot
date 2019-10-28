@@ -16,6 +16,10 @@ const debugHandler = msg => {
   addServer(server);
   addUser(user);
   addMessage(message);
+
+  if (msg.channel.name === 'bot') {
+    msg.react('✅');
+  }
 };
 
 export default debugHandler;
