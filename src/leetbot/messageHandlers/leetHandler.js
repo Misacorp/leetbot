@@ -1,5 +1,6 @@
 import emojis from '../emoji/emojis';
 import isLeet from '../isLeet';
+import isLeeb from '../isLeeb';
 
 import parseMessage from '../../../dist/leetbot/extractors/parseMessage';
 import addServer from '../../../dist/leetbot/database/queries/addServer';
@@ -23,8 +24,19 @@ const leetHandler = msg => {
     addMessage(message);
 
     msg.react(emojis.leet.id);
-  } else {
+  } else if (isLeeb(createdAt)) {
+    // Extract objects
+    const { server, user, message } = parseMessage(msg, 'FAILED_LEET');
+
+    // Add rows to database tables.
+    addServer(server);
+    addUser(user);
+    addMessage(message);
+
+    // React with a leeb-emoji if the time is 13:38
     msg.react(emojis.leeb.id);
+  } else {
+    msg.react('🙄');
   }
 };
 

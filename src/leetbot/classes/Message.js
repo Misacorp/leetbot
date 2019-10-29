@@ -37,11 +37,21 @@ class Message {
       throw e;
     }
 
+    this.setType(type);
+
+    // Validate createdAt
+    if (!createdAt || typeof createdAt !== 'object' || !(createdAt instanceof Date)) {
+      throw new Error('The createdAt property of a message must be a valid Date object');
+    }
+    this.createdAt = createdAt;
+  }
+
+  setType(newType) {
     try {
-      validateString(type);
-      if (!messageTypes.includes(type)) {
+      validateString(newType);
+      if (!messageTypes.includes(newType)) {
         throw new Error(
-          `Invalid message type supplied to Message constructor. Expected one of ${messageTypes} but got ${type}`,
+          `Invalid message type supplied to Message setType. Expected one of ${messageTypes} but got ${newType}`,
         );
       }
 
@@ -51,17 +61,11 @@ class Message {
 
       // Type cannot be FAILED_LEET if createdAt is not in the range [13:38, 13:39[
 
-      this.type = type;
+      this.type = newType;
     } catch (e) {
       console.warn('The following error occurred when validating a Message type');
       throw e;
     }
-
-    // Validate createdAt
-    if (!createdAt || typeof createdAt !== 'object' || !(createdAt instanceof Date)) {
-      throw new Error('The createdAt property of a message must be a valid Date object');
-    }
-    this.createdAt = createdAt;
   }
 }
 

@@ -6,7 +6,7 @@ import timeBetween from './util/timeBetween';
  * @returns {boolean} Is the time in the range [13:38, 13:39[
  */
 const isLeeb = (time = new Date()) => {
-  const leetStart = new Date().setHours(13, 33, 0);
+  const leetStart = new Date().setHours(13, 38, 0);
   const leetEnd = new Date().setHours(13, 39, 0);
   return timeBetween(time, leetStart, leetEnd);
 };
