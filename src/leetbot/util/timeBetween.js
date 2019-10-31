@@ -3,7 +3,7 @@ import { TIMEZONE } from '../../constants/config';
 
 /**
  * Checks if a date object is between a start and end date. Inclusive at the start of the interval,
- * exclusive at th end.
+ * exclusive at the end.
  * @param {Date} time       Time to check.
  * @param {Date} start      Start of valid time window.
  * @param {Date} start      End of valid time window.
