@@ -10,6 +10,9 @@ import leebHandler from './messageHandlers/leebHandler';
 import debugHandler from './messageHandlers/debugHandler';
 import handleJarka from './messageHandlers/handleJarka';
 
+// Load .env into process.env
+require('dotenv').config();
+
 database.open();
 
 const client = new Discord.Client();
@@ -27,6 +30,9 @@ client.on('message', msg => {
   debugHandler(msg);
 });
 
-client
-  .login(process.env.DISCORD_TOKEN)
-  .catch(err => console.log(`Error when logging in with token ${process.env.DISCORD_TOKEN}.`, err));
+client.login(process.env.DISCORD_TOKEN).catch(err => {
+  if (!process.env.DISCORD_TOKEN) {
+    console.log('Error! Token is undefined');
+  }
+  console.error(err);
+});
