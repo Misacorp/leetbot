@@ -27,4 +27,6 @@ client.on('message', msg => {
   debugHandler(msg);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client
+  .login(process.env.DISCORD_TOKEN)
+  .catch(err => console.log(`Error when logging in with token ${process.env.DISCORD_TOKEN}.`, err));
