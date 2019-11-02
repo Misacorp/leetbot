@@ -8,7 +8,7 @@ import Message from '../classes/Message';
  * @param {string} type Message type.
  * @returns {object} { server, user, message }
  */
-const parseMessage = (msg, type = 'OTHER') => {
+const parseMessage = (msg, type) => {
   // Get server.
   const { guild } = msg;
   const { id: serverId, name: serverName, iconURL: serverIconUrl } = guild;

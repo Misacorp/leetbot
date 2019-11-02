@@ -1,4 +1,6 @@
 import validateString from '../util/validators/validateString';
+import isLeet from '../isLeet';
+import isLeeb from '../isLeeb';
 
 export const messageTypes = ['LEET', 'FAILED_LEET', 'LEEB', 'OTHER'];
 
@@ -37,15 +39,22 @@ class Message {
       throw e;
     }
 
-    this.setType(type);
-
     // Validate createdAt
     if (!createdAt || typeof createdAt !== 'object' || !(createdAt instanceof Date)) {
       throw new Error('The createdAt property of a message must be a valid Date object');
     }
     this.createdAt = createdAt;
+
+    if (type && typeof type === 'string') {
+      this.setType(type);
+    }
   }
 
+  /**
+   * Sets the message type.
+   * Enforces LEET, FAILED_LEET and LEEB types are not set if the createdAt time does not match.
+   * @param {string} newType New type to set.
+   */
   setType(newType) {
     try {
       validateString(newType);
@@ -56,10 +65,19 @@ class Message {
       }
 
       // Type cannot be LEET if createdAt is not in the range [13:37, 13:38[
+      if (newType === 'LEET' && !isLeet(this.createdAt)) {
+        throw new Error(`Message type cannot be LEET when createdAt is ${this.createdAt}`);
+      }
 
       // Type cannot be LEEB if createdAt is not in the range [13:38, 13:39[
+      if (newType === 'LEEB' && !isLeeb(this.createdAt)) {
+        throw new Error(`Message type cannot be LEEB when createdAt is ${this.createdAt}`);
+      }
 
       // Type cannot be FAILED_LEET if createdAt is not in the range [13:38, 13:39[
+      if (newType === 'FAILED_LEET' && !isLeeb(this.createdAt)) {
+        throw new Error(`Message type cannot be FAILED_LEET when createdAt is ${this.createdAt}`);
+      }
 
       this.type = newType;
     } catch (e) {

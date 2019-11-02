@@ -4,10 +4,10 @@ import { TIMEZONE } from '../../constants/config';
 /**
  * Checks if a date object is between a start and end date. Inclusive at the start of the interval,
  * exclusive at the end.
- * @param {Date} time       Time to check.
- * @param {Date} start      Start of valid time window.
- * @param {Date} start      End of valid time window.
- * @param {string} timezone Timezone to use. Follows moment.js timezone standards.
+ * @param {Date} time         Time to check.
+ * @param {number} startEpoch Start of valid time window.
+ * @param {number} endEpoch   End of valid time window.
+ * @param {string} timezone   Timezone to use. Follows moment.js timezone standards.
  * @returns {boolean} Is the time between the start and end time.
  */
 const timeBetween = (time, startEpoch, endEpoch, timezone = TIMEZONE) => {
@@ -29,11 +29,6 @@ const timeBetween = (time, startEpoch, endEpoch, timezone = TIMEZONE) => {
     minute: end.getMinutes(),
     second: end.getSeconds(),
   });
-
-  console.log('adjustedTime', adjustedTime.toString());
-  console.log('adjustedEnd: ', adjustedEnd.toString());
-  console.log('adjustedStart: ', adjustedStart.toString());
-  console.log('-------');
 
   return adjustedStart <= adjustedTime && adjustedTime < adjustedEnd;
 };

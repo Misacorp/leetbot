@@ -1,43 +1,47 @@
 import emojis from '../emoji/emojis';
-import isLeet from '../isLeet';
-import isLeeb from '../isLeeb';
 
-import parseMessage from '../../../dist/leetbot/extractors/parseMessage';
-import addServer from '../../../dist/leetbot/database/queries/addServer';
-import addUser from '../../../dist/leetbot/database/queries/addUser';
-import addMessage from '../../../dist/leetbot/database/queries/addMessage';
+import parseMessage from '../extractors/parseMessage';
+import addServerUserMessage from '../database/queries/addServerUserMessage';
 
 /**
  * Checks if the message was created at 13:37 Finnish time and performs
  * some actions if it was.
  * @param {object} msg Discord message object.
+ * @returns {boolean} Was any message successfully inserted into the database?
  */
 const leetHandler = msg => {
-  const { createdAt } = msg;
-  if (isLeet(createdAt)) {
-    // Extract objects
-    const { server, user, message } = parseMessage(msg, 'LEET');
+  let emoji;
 
-    // Add rows to database tables.
-    addServer(server);
-    addUser(user);
-    addMessage(message);
+  // Extract the Server, User and Message objects from the message.
+  const { server, user, message } = parseMessage(msg);
 
-    msg.react(emojis.leet.id);
-  } else if (isLeeb(createdAt)) {
-    // Extract objects
-    const { server, user, message } = parseMessage(msg, 'FAILED_LEET');
-
-    // Add rows to database tables.
-    addServer(server);
-    addUser(user);
-    addMessage(message);
-
-    // React with a leeb-emoji if the time is 13:38
-    msg.react(emojis.leeb.id);
-  } else {
-    msg.react('🙄');
+  // The user sent a :leet: emoji. Let's try to create a message of that type.
+  try {
+    message.setType('LEET');
+    emoji = emojis.leet.id;
+  } catch (leetErr) {
+    try {
+      message.setType('FAILED_LEET');
+      emoji = emojis.leeb.id;
+    } catch (failedLeetErr) {
+      // The time does not warrant a LEET or FAILED LEET.
+      // What is this user trying to do? Let's roll our eyes and return.
+      msg.react('🙄');
+      return false;
+    }
   }
+
+  // Add rows to database tables.
+  const dbInsertionSuccesss = addServerUserMessage(server, user, message);
+  if (!dbInsertionSuccesss) {
+    // Something went wrong when adding the rows. React with an appropriate emoji.
+    msg.react('☠');
+    return false;
+  }
+
+  // Everything went well. Let's celebrate with a reaction!
+  msg.react(emoji);
+  return true;
 };
 
 export default leetHandler;
