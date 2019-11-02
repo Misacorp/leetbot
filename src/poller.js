@@ -7,6 +7,9 @@ import { POLLER_INTERVAL } from './constants/config';
  * @returns {function} Callback to clear the interval.
  */
 const poller = (desiredInterval, functions = []) => {
+  // Call all functions on start
+  functions.forEach(func => func());
+
   let interval = desiredInterval;
 
   // Verify the interval was a number. Do not allow under polling rates under 1000ms.
