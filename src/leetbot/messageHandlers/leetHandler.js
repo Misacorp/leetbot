@@ -2,6 +2,7 @@ import emojis from '../emoji/emojis';
 
 import parseMessage from '../extractors/parseMessage';
 import addServerUserMessage from '../database/queries/addServerUserMessage';
+import checkDuplicateMessage from './checkDuplicateMessage';
 
 /**
  * Checks if the message was created at 13:37 Finnish time and performs
@@ -31,7 +32,15 @@ const leetHandler = msg => {
     }
   }
 
-  // Add rows to database tables.
+  // Does a message of the created type already exist on this server today?
+  const alreadyExists = checkDuplicateMessage(server, user, message);
+  if (alreadyExists) {
+    // A LEET was already posted by this user to this server today. This makes us ANGRY!
+    msg.react('😠');
+    return false;
+  }
+
+  // The LEET is legit! Save it to the database.
   const dbInsertionSuccesss = addServerUserMessage(server, user, message);
   if (!dbInsertionSuccesss) {
     // Something went wrong when adding the rows. React with an appropriate emoji.

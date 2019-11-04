@@ -34,7 +34,7 @@ routes.get('/list', (req, res, next) => {
   res.render('index', { title });
 });
 
-routes.get('/user/:userName', (req, res) => {
+routes.get('/messages/user/:userName', (req, res) => {
   user(req, res);
 });
 
