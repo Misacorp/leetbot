@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import user from './leetAPI/user';
 
 const routes = Router();
 
@@ -31,6 +32,10 @@ routes.get('/list', (req, res, next) => {
   }
 
   res.render('index', { title });
+});
+
+routes.get('/user/:userName', (req, res) => {
+  user(req, res);
 });
 
 export default routes;

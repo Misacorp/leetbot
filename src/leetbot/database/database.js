@@ -1,5 +1,8 @@
 const DB = require('better-sqlite3-helper');
 
+const resetDB = false;
+const forceMigrate = process.env.ENV === 'development' && resetDB;
+
 const database = {
   /**
    * Open a database connection in a file.
@@ -15,7 +18,7 @@ const database = {
       WAL: true, // automatically enable 'PRAGMA journal_mode = WAL'
       migrate: {
         // disable completely by setting `migrate: false`
-        force: process.env.ENV === 'development' ? 'last' : false, // set to 'last' to automatically reapply the last migration-file
+        force: forceMigrate ? 'last' : false, // set to 'last' to automatically reapply the last migration-file
         table: 'migration', // name of the database table that is used to keep track
         migrationsPath: `${path}/migrations`, // path of the migration-files
       },
