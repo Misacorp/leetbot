@@ -42,14 +42,15 @@ class Message {
     }
 
     // Validate createdAt
-    console.log('Message createdAt:', createdAt, typeof createdAt);
     if (!createdAt || typeof createdAt !== 'object' || !(createdAt instanceof Date)) {
-      throw new Error('The createdAt property of a message must be a valid Date object');
+      throw new Error(`The createdAt property of a message must be a valid Date object, got ${typeof createdAt}`);
     }
     this.createdAt = createdAt;
 
     if (type && typeof type === 'string') {
       this.setType(type);
+    } else {
+      throw new Error(`The type property of a message cannot be ${type}`);
     }
   }
 

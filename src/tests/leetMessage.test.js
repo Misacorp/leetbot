@@ -1,7 +1,6 @@
 import uuid from 'uuid/v4';
 import moment from 'moment-timezone';
 
-import database from '../leetbot/database/database';
 import createServer from './util/createServer';
 import createUser from './util/createUser';
 import Message from '../leetbot/classes/Message';
@@ -23,25 +22,15 @@ const createLeetMessage = (server, user) => {
     userId: user.id,
     serverId: server.id,
     type: 'LEET',
-    createdAt: new Date(time.toDate()),
+    createdAt: time.toDate(),
   });
 };
-
-beforeAll(() => {
-  return database.open();
-});
-
-afterAll(() => {
-  return database.close();
-});
 
 describe('leet message', () => {
   it('creates a leet message with no errors', () => {
     const server = createServer();
     const user = createUser();
     const message = createLeetMessage(server, user);
-
-    // console.log('message date', message.createdAt, typeof message.createdAt, message.createdAt instanceof Date);
 
     const dbInsertionSuccesss = addServerUserMessage(server, user, message);
     if (!dbInsertionSuccesss) throw new Error('Message could not be inserted');
