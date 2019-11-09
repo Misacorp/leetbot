@@ -1,4 +1,4 @@
-import getMessagesByUserName from '../leetbot/database/queries/getMessage';
+import getMessagesByUserName from '../leetbot/database/queries/getMessagesByUsername';
 
 const user = (req, res) => {
   // Parse request

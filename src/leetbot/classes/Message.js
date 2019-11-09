@@ -14,7 +14,9 @@ export const messageTypes = ['LEET', 'FAILED_LEET', 'LEEB', 'OTHER'];
  * @param {Date}   createdAt Date object representing when the message was created.
  */
 class Message {
-  constructor(id, userId, serverId, type, createdAt) {
+  constructor(msg) {
+    const { id, userId, serverId, type, createdAt } = msg;
+
     try {
       validateString(id, 8);
       this.id = id;
@@ -40,6 +42,7 @@ class Message {
     }
 
     // Validate createdAt
+    console.log('Message createdAt:', createdAt, typeof createdAt);
     if (!createdAt || typeof createdAt !== 'object' || !(createdAt instanceof Date)) {
       throw new Error('The createdAt property of a message must be a valid Date object');
     }

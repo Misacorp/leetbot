@@ -12,10 +12,12 @@ import addMessage from './addMessage';
  */
 const addServerUserMessage = (server, user, message) => {
   try {
+    console.log(message);
     addServer(server);
     addUser(user);
     addMessage(message);
   } catch (e) {
+    console.log(e);
     return false;
   }
 

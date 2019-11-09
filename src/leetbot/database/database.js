@@ -1,7 +1,6 @@
 const DB = require('better-sqlite3-helper');
 
-const resetDB = false;
-const forceMigrate = process.env.ENV === 'development' && resetDB;
+const forceMigrate = true;
 
 const database = {
   /**
@@ -31,7 +30,7 @@ const database = {
    * Close database connection.
    */
   close: () => {
-    console.log('No close method defined');
+    DB().close();
   },
 
   /**
