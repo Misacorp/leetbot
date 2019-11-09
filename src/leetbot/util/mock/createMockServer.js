@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import Server from '../../leetbot/classes/Server';
+import Server from '../../classes/Server';
 
 const servers = [
   {
@@ -18,10 +18,10 @@ const servers = [
  * Creates a mock server object.
  * @returns {Server} New server object.
  */
-const createServer = () => {
+const createMockServer = () => {
   const randomIndex = Math.floor(Math.random() * servers.length);
   const s = servers[randomIndex];
   return new Server(s.id, s.name, s.iconUrl);
 };
 
-export default createServer;
+export default createMockServer;

@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import User from '../../leetbot/classes/User';
+import User from '../../classes/User';
 
 const users = [
   {
@@ -23,10 +23,10 @@ const users = [
  * Creates a mock User object.
  * @returns {User} User object.
  */
-const createServer = () => {
+const createMockUser = () => {
   const randomIndex = Math.floor(Math.random() * users.length);
   const u = users[randomIndex];
   return new User(u.id, u.name, u.avatarUrl);
 };
 
-export default createServer;
+export default createMockUser;
