@@ -3,7 +3,7 @@ import Discord from 'discord.js';
 import database from './database/database';
 import handleEmoji from './handleEmoji';
 import { getEmojis } from './emoji/emojis';
-import poller from '../poller';
+import poller from './util/poller';
 import updateStatus from './updateStatus';
 import leetHandler from './messageHandlers/leetHandler';
 import leebHandler from './messageHandlers/leebHandler';

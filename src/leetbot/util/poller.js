@@ -1,4 +1,4 @@
-import { POLLER_INTERVAL } from './constants/config';
+import { POLLER_INTERVAL } from '../../constants/config';
 
 /**
  * Creates a poller that runs at an interval.

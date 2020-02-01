@@ -1,3 +1,5 @@
+import logger from '../../logger';
+
 import validateString from '../util/validators/validateString';
 import isLeet from '../isLeet';
 import isLeeb from '../isLeeb';
@@ -20,24 +22,14 @@ class Message {
     try {
       validateString(id, 8);
       this.id = id;
-    } catch (e) {
-      console.warn('The following error occurred when validating a Message id');
-      throw e;
-    }
 
-    try {
       validateString(userId, 8);
       this.userId = userId;
-    } catch (e) {
-      console.warn('The following error occurred when validating a User id on Message creation');
-      throw e;
-    }
 
-    try {
       validateString(serverId, 8);
       this.serverId = serverId;
     } catch (e) {
-      console.warn('The following error occurred when validating a Server id on Message creation');
+      logger.error(e);
       throw e;
     }
 
@@ -83,7 +75,7 @@ class Message {
 
       this.type = newType;
     } catch (e) {
-      console.warn('The following error occurred when validating a Message type');
+      logger.error(e);
       throw e;
     }
   }
