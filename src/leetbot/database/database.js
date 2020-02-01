@@ -1,4 +1,5 @@
 const DB = require('better-sqlite3-helper');
+const appRoot = require('app-root-path');
 
 const isDevelopment = process.env.ENV === 'development';
 const forceMigrate = isDevelopment && true;
@@ -8,7 +9,7 @@ const database = {
    * Open a database connection in a file.
    * @param {string} path Path to database file directory.
    */
-  open: (path = `${__dirname}`) => {
+  open: (path = `${appRoot}/database`) => {
     // The first call creates the global instance with your settings
     DB({
       path: `${path}/leet.db`, // this is the default
@@ -20,7 +21,7 @@ const database = {
         // disable completely by setting `migrate: false`
         force: forceMigrate ? 'last' : false, // set to 'last' to automatically reapply the last migration-file
         table: 'migration', // name of the database table that is used to keep track
-        migrationsPath: `${path}/migrations`, // path of the migration-files
+        migrationsPath: `${__dirname}/migrations`, // path of the migration-files
       },
     });
 

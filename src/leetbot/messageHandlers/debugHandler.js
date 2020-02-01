@@ -5,7 +5,7 @@ import addUser from '../database/queries/addUser';
 import addMessage from '../database/queries/addMessage';
 // import checkDuplicateMessage from './checkDuplicateMessage';
 
-const useDebugHandler = false;
+const useDebugHandler = process.env.ENV === 'development';
 
 /**
  * Used for testing and debugging messages.

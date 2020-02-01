@@ -20,7 +20,13 @@ const parseMessage = (msg, type) => {
   const user = new User(userId, tag, displayAvatarURL);
 
   // Get message.
-  const message = new Message(msg.id, userId, serverId, type, msg.createdAt);
+  const message = new Message({
+    id: msg.id,
+    userId,
+    serverId,
+    type,
+    createdAt: msg.createdAt,
+  });
 
   return { server, user, message };
 };

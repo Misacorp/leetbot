@@ -47,10 +47,8 @@ class Message {
     }
     this.createdAt = createdAt;
 
-    if (type && typeof type === 'string') {
+    if (type) {
       this.setType(type);
-    } else {
-      throw new Error(`The type property of a message cannot be ${type}`);
     }
   }
 
