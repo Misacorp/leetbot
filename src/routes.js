@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import user from './leetAPI/user';
+import server from './leetAPI/server/server';
 
 const routes = Router();
 
@@ -36,6 +37,10 @@ routes.get('/list', (req, res, next) => {
 
 routes.get('/messages/user/:userName', (req, res) => {
   user(req, res);
+});
+
+routes.get('/server/:serverId', (req, res) => {
+  server(req, res);
 });
 
 export default routes;

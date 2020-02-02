@@ -2,7 +2,7 @@ const DB = require('better-sqlite3-helper');
 const appRoot = require('app-root-path');
 
 const isDevelopment = process.env.ENV === 'development';
-const forceMigrate = isDevelopment && true;
+const forceMigrate = isDevelopment && false;
 
 const database = {
   /**
