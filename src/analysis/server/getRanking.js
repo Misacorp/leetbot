@@ -23,7 +23,8 @@ const getRanking = (serverId, type) => {
     if (type) {
       const sorted = countsByUserByType
         .filter(row => row.counts[type] > 0)
-        .sort((a, b) => a.counts[type] < b.counts[type]);
+        .sort((a, b) => b.counts[type] - a.counts[type]);
+
       return sorted;
     }
 
