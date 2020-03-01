@@ -1,8 +1,8 @@
 import logger from '../../logger';
 import getServer from '../../leetbot/database/queries/getServer';
 import getMessagesByServer from '../../leetbot/database/queries/getMessagesByServer';
-import countByType from './countByType';
-import countByUserByType from './countByUserByType';
+import countByType from '../../analysis/countByType';
+import countByUserByType from '../../analysis/countByUserByType';
 
 /**
  * Gets a single server's summary.

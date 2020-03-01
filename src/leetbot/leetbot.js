@@ -9,6 +9,7 @@ import leetHandler from './messageHandlers/leetHandler';
 import leebHandler from './messageHandlers/leebHandler';
 import debugHandler from './messageHandlers/debugHandler';
 import handleJarka from './messageHandlers/handleJarka';
+import handleCommands from './messageHandlers/commands/handleCommands';
 
 // Load .env into process.env
 require('dotenv').config();
@@ -24,10 +25,13 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  handleJarka(msg);
-  handleEmoji(msg, 'leet', message => leetHandler(message));
-  handleEmoji(msg, 'leeb', message => leebHandler(message));
-  debugHandler(msg);
+  if (!msg.author.bot) {
+    handleJarka(msg);
+    handleEmoji(msg, 'leet', message => leetHandler(message));
+    handleEmoji(msg, 'leeb', message => leebHandler(message));
+    handleCommands(msg, client);
+    debugHandler(msg);
+  }
 });
 
 client.login(process.env.DISCORD_TOKEN).catch(err => {
