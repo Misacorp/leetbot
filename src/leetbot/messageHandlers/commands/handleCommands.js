@@ -15,8 +15,6 @@ const handleCommands = (msg, client) => {
   }
 
   const [command, args] = commandResult;
-  console.log('command', command);
-
   switch (command) {
     case 'ranking':
       handleRanking(msg, args);
