@@ -21,6 +21,7 @@ const timeBetween = (time, startEpoch, endEpoch, timezone = TIMEZONE) => {
     hour: start.getHours(),
     minute: start.getMinutes(),
     second: start.getSeconds(),
+    millisecond: end.getMilliseconds(),
   });
 
   let adjustedEnd = moment.tz(end, timezone);
@@ -28,6 +29,7 @@ const timeBetween = (time, startEpoch, endEpoch, timezone = TIMEZONE) => {
     hour: end.getHours(),
     minute: end.getMinutes(),
     second: end.getSeconds(),
+    millisecond: end.getMilliseconds(),
   });
 
   return adjustedStart <= adjustedTime && adjustedTime < adjustedEnd;

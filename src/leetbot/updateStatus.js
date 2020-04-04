@@ -14,8 +14,8 @@ let lastStatus = '';
  */
 const updateStatus = client => {
   // Define the minute before leet
-  const beforeLeetStart = new Date().setHours(13, 36, 0);
-  const beforeLeetEnd = new Date().setHours(13, 37, 0);
+  const beforeLeetStart = new Date().setHours(13, 36, 0, 0);
+  const beforeLeetEnd = new Date().setHours(13, 37, 0, 0);
   const isMinuteBeforeLeet = timeBetween(new Date(), beforeLeetStart, beforeLeetEnd);
 
   if (isMinuteBeforeLeet) {
