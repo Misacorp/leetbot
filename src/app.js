@@ -18,7 +18,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(process.env.CLIENT_PATH));
 
 // Routes
 app.use('/', routes);
