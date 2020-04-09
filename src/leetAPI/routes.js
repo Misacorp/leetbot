@@ -7,7 +7,7 @@ import server from './server/server';
 
 const routes = Router();
 
-routes.get(`/${routeFragments.MESSAGE}/${routeFragments.USER}/:userName`, (req, res) => {
+routes.get(`/${routeFragments.USER}/:userId`, (req, res) => {
   user(req, res);
 });
 

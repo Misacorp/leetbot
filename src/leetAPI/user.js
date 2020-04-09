@@ -1,15 +1,13 @@
-import getMessagesByUserName from '../leetbot/database/queries/getMessagesByUsername';
+import logger from '../logger';
+import getMessagesByUserId from '../leetbot/database/queries/getMessagesByUserId';
 
 const user = (req, res) => {
   // Parse request
-  const { userName } = req.params;
-  const [, name, number] = userName.match(/(.+)([0-9]{4}$)/);
-  const tag = `${name}#${number}`;
+  const { userId } = req.params;
 
   // Get user from DB
   try {
-    const userData = getMessagesByUserName(tag);
-    console.log(userData);
+    const userData = getMessagesByUserId(userId);
 
     // Construct response
     const body = userData;
@@ -17,7 +15,7 @@ const user = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(body));
   } catch (e) {
-    console.error(e);
+    logger.error(e);
     res.status(500);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(e));

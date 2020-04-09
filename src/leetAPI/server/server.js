@@ -4,14 +4,19 @@ import getMessagesByServer from '../../leetbot/database/queries/getMessagesBySer
 import countByType from '../../analysis/countByType';
 import countByUserByType from '../../analysis/countByUserByType';
 
+import { USER } from '../routeFragments';
+import getPublicUrl from '../util/getPublicUrl';
+
 /**
  * Gets a single server's summary.
  */
 const server = (req, res) => {
+  const publicUrl = getPublicUrl(req);
+
   // Parse request
   const { serverId } = req.params;
 
-  // Get user from DB
+  // Get server from DB
   try {
     const serverInfo = getServer(serverId);
 
@@ -32,6 +37,11 @@ const server = (req, res) => {
 
     const countsByUserByType = countByUserByType(messages);
     returnValue.users = countsByUserByType;
+
+    // Add links to individual user data
+    returnValue.users = returnValue.users.map(user => {
+      return { ...user, _links: { self: `${publicUrl}/${USER}/${user.id}` } };
+    });
 
     // Construct response
     const body = returnValue;
