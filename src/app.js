@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import routes from './routes';
+import routes from './leetAPI/routes';
 
 const app = express();
 app.disable('x-powered-by');
