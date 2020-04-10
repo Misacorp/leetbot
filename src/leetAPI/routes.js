@@ -5,7 +5,7 @@ import user from './user';
 import servers from './server/servers';
 import server from './server/server';
 
-const routes = Router();
+const routes = Router({ strict: true });
 
 routes.get(`/${routeFragments.USER}/:userId`, (req, res) => {
   user(req, res);

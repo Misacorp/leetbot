@@ -6,6 +6,7 @@ import routes from './leetAPI/routes';
 
 const app = express();
 app.disable('x-powered-by');
+app.enable('strict-routing');
 
 // View engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -24,10 +25,21 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(process.env.CLIENT_PATH));
 
-// Routes
-app.use('/', routes);
+// Remove trailing slashes
+app.use((req, res, next) => {
+  if (req.url.substr(-1) === '/' && req.url.length > 1) req.url.slice(0, -1);
+  next();
+});
+
+// API routes
+app.use('/api', routes);
+
+// Client
+app.use('/', express.static(process.env.CLIENT_PATH));
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: process.env.CLIENT_PATH });
+});
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
