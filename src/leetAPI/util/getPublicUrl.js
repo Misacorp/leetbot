@@ -5,7 +5,7 @@
  * @returns {string} Location where the API is running at.
  */
 const getPublicUrl = req => {
-  return `${req.protocol}://${req.headers.host}`;
+  return `${req.protocol}://${req.headers.host}/api`;
 };
 
 export default getPublicUrl;
