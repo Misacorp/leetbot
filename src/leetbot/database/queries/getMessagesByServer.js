@@ -6,8 +6,8 @@ import DB from 'better-sqlite3-helper';
  */
 const getMessagesByServer = serverId => {
   const stmt = DB().prepare(
-    `SELECT messages.userId, messages.type, users.name FROM messages
-     INNER JOIN users ON messages.userId = users.id
+    `SELECT cast(messages.userId as text) as userId, messages.type, users.name FROM messages
+     JOIN users ON messages.userId = users.id
      WHERE messages.serverId = $serverId`,
   );
   const result = stmt.all({ serverId });
