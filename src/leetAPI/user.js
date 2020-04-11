@@ -1,5 +1,6 @@
 import logger from '../logger';
 import getMessagesByUserId from '../leetbot/database/queries/getMessagesByUserId';
+import { getUserById } from '../leetbot/database/queries/getUser';
 
 const user = (req, res) => {
   // Parse request
@@ -7,10 +8,11 @@ const user = (req, res) => {
 
   // Get user from DB
   try {
-    const userData = getMessagesByUserId(userId);
+    const userData = getUserById(userId);
+    const userMessages = getMessagesByUserId(userId);
 
     // Construct response
-    const body = userData;
+    const body = { ...userData, messages: userMessages };
     res.status(200);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(body));
