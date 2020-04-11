@@ -2,7 +2,12 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+
 import routes from './leetAPI/routes';
+
+// Load env variables to process.env
+dotenv.config();
 
 const app = express();
 app.disable('x-powered-by');
