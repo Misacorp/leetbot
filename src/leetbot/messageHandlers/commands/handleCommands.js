@@ -1,5 +1,6 @@
 import parseCommand from './parseCommand';
 import handleRanking from './ranking/handleRanking';
+import handleLeetLord from './leetLord/handleLeetLord';
 
 /**
  * Handles commands to this bot.
@@ -18,6 +19,9 @@ const handleCommands = (msg, client) => {
   switch (command) {
     case 'ranking':
       handleRanking(msg, args);
+      break;
+    case 'leetlord':
+      handleLeetLord(msg, client);
       break;
     default:
   }
