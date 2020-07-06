@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -18,7 +17,7 @@ app.enable('strict-routing');
 // app.set('view engine', 'pug');
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://leet.misacorp.io');
+  res.header('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGINS);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
