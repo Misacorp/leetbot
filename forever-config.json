@@ -1,0 +1,9 @@
+{
+    "uid": "leetbot",
+    "max": 10,
+    "spinSleepTime": 5000,
+    "append": true,
+    "watch": true,
+    "script": "dist/index.js",
+    "sourceDir": "/home/pi/Projects/leetbot/"
+}
