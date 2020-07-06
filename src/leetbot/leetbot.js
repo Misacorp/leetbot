@@ -8,8 +8,8 @@ import updateStatus from './updateStatus';
 import leetHandler from './messageHandlers/leetHandler';
 import leebHandler from './messageHandlers/leebHandler';
 import debugHandler from './messageHandlers/debugHandler';
-import handleJarka from './messageHandlers/handleJarka';
 import handleCommands from './messageHandlers/commands/handleCommands';
+import handlePhrases from './messageHandlers/phrases/handlePhrases';
 
 // Load .env into process.env
 require('dotenv').config();
@@ -26,9 +26,9 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (!msg.author.bot) {
-    handleJarka(msg);
     handleEmoji(msg, 'leet', message => leetHandler(message));
     handleEmoji(msg, 'leeb', message => leebHandler(message));
+    handlePhrases(msg);
     handleCommands(msg, client);
     debugHandler(msg);
   }
