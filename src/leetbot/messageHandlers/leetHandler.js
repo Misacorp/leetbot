@@ -3,6 +3,9 @@ import emojis from '../emoji/emojis';
 import parseMessage from '../extractors/parseMessage';
 import addServerUserMessage from '../database/queries/addServerUserMessage';
 import checkDuplicateMessage from './checkDuplicateMessage';
+import checkExistingMessage from './checkExistingMessage';
+import isLeet from '../isLeet';
+import isLeeb from '../isLeeb';
 
 /**
  * Checks if the message was created at 13:37 Finnish time and performs
@@ -32,11 +35,16 @@ const leetHandler = msg => {
     }
   }
 
-  // Does a message of the created type already exist on this server today?
+  // Does a message of a valid type already exist on this server today?
   const alreadyExists = checkDuplicateMessage(server, user, message);
-  if (alreadyExists) {
+  const leetExists = checkExistingMessage(server, user, message, 'LEET');
+
+  if (alreadyExists || leetExists) {
     // A LEET was already posted by this user to this server today. This makes us ANGRY!
-    msg.react('😠');
+    if (isLeet(message.createdAt) || isLeeb(message.createdAt)) {
+      msg.react('😠');
+    }
+
     return false;
   }
 
