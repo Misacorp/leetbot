@@ -1,4 +1,4 @@
-import createMention from '../../util/createMention';
+import Discord from 'discord.js';
 
 /**
  * Parses a command, returning it and its arguments.
@@ -14,7 +14,7 @@ const parseCommand = (msg, client) => {
   // The bot must be mentioned in a command.
   if (msg.isMentioned(client.user)) {
     const { content } = msg;
-    const contentWithoutBotMention = content.replace(createMention(client.user.id), '').trim();
+    const contentWithoutBotMention = content.replace(Discord.MessageMentions.USERS_PATTERN, '').trim();
 
     const words = contentWithoutBotMention.split(' ');
     if (words.length > 0) {
