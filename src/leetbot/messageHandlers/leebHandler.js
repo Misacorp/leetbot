@@ -1,3 +1,4 @@
+import logger from '../../logger';
 import emojis from '../emoji/emojis';
 
 import parseMessage from '../extractors/parseMessage';
@@ -23,10 +24,12 @@ const leebHandler = msg => {
   try {
     message.setType('LEEB');
     emoji = emojis.leeb.id;
+    logger.info(`User ${user.name} is creating LEEB`);
   } catch (failedLeebErr) {
     // The time does not warrant a LEEB.
     // What is this user trying to do? Let's roll our eyes and return.
     msg.react('🙄');
+    logger.info(`User ${user.name} tried to create LEEB for no reason and failed`);
     return false;
   }
 
@@ -41,6 +44,8 @@ const leebHandler = msg => {
     if (isLeet(message.createdAt) || isLeeb(message.createdAt)) {
       msg.react('😠');
     }
+
+    logger.info(`User ${user.name} already has a registered message today.`);
 
     return false;
   }

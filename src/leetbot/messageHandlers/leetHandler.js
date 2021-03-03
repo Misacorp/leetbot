@@ -1,3 +1,4 @@
+import logger from '../../logger';
 import emojis from '../emoji/emojis';
 
 import parseMessage from '../extractors/parseMessage';
@@ -23,14 +24,17 @@ const leetHandler = msg => {
   try {
     message.setType('LEET');
     emoji = emojis.leet.id;
+    logger.info(`User ${user.name} is creating LEET`);
   } catch (leetErr) {
     try {
       message.setType('FAILED_LEET');
       emoji = emojis.leeb.id;
+      logger.info(`User ${user.name} is creating FAILED_LEET`);
     } catch (failedLeetErr) {
       // The time does not warrant a LEET or FAILED LEET.
       // What is this user trying to do? Let's roll our eyes and return.
       msg.react('🙄');
+      logger.info(`User ${user.name} tried to create LEET for no reason and failed`);
       return false;
     }
   }
@@ -45,6 +49,8 @@ const leetHandler = msg => {
       msg.react('😠');
     }
 
+    logger.info(`User ${user.name} already has a registered message today.`);
+
     return false;
   }
 
@@ -52,7 +58,7 @@ const leetHandler = msg => {
   const dbInsertionSuccesss = addServerUserMessage(server, user, message);
   if (!dbInsertionSuccesss) {
     // Something went wrong when adding the rows. React with an appropriate emoji.
-    msg.react('☠');
+    msg.react('👾');
     return false;
   }
 

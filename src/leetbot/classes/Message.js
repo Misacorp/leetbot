@@ -75,7 +75,7 @@ class Message {
 
       this.type = newType;
     } catch (e) {
-      logger.error(e);
+      logger.warn(e.message);
       throw e;
     }
   }

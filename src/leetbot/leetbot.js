@@ -26,10 +26,17 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (!msg.author.bot) {
-    handleEmoji(msg, 'leet', message => leetHandler(message));
-    handleEmoji(msg, 'leeb', message => leebHandler(message));
-    handlePhrases(msg);
-    handleCommands(msg, client);
+    const leetHandled = handleEmoji(msg, 'leet', message => leetHandler(message));
+
+    if (!leetHandled) {
+      const leebHandled = handleEmoji(msg, 'leeb', message => leebHandler(message));
+
+      if (!leebHandled) {
+        handlePhrases(msg);
+        handleCommands(msg, client);
+      }
+    }
+
     debugHandler(msg);
   }
 });

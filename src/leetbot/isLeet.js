@@ -6,6 +6,13 @@ import timeBetween from './util/timeBetween';
  * @returns {boolean} Is the time in the range [13:37, 13:38[
  */
 const isLeet = (time = new Date()) => {
+  // In dev mode leet is between the 20th and 40th second of each minute.
+  if (process.env.ENV === 'development') {
+    const devLeetStart = new Date().setSeconds(20);
+    const devLeetEnd = new Date().setSeconds(40);
+    return timeBetween(time, devLeetStart, devLeetEnd);
+  }
+
   const leetStart = new Date().setHours(13, 37, 0, 0);
   const leetEnd = new Date().setHours(13, 38, 0, 0);
   return timeBetween(time, leetStart, leetEnd);
