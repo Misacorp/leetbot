@@ -18,7 +18,7 @@ const handleRanking = (msg, args) => {
     if (uppercaseArgs.includes(type)) {
       const ranks = ranking(msg, type);
       if (ranks) {
-        content = createRankingString(ranks, type, msg.guild.name);
+        content = createRankingString(ranks, type, msg.guild);
       }
     }
   });

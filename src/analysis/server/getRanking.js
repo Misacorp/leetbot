@@ -21,18 +21,14 @@ const getRanking = (serverId, type) => {
 
     // Sort the ranking by the given type, if a type was given.
     if (type) {
-      const sorted = countsByUserByType
-        .filter(row => row.counts[type] > 0)
-        .sort((a, b) => b.counts[type] - a.counts[type]);
-
-      return sorted;
+      return countsByUserByType.filter(row => row.counts[type] > 0).sort((a, b) => b.counts[type] - a.counts[type]);
     }
 
     // No type was given. Just return the results.
     return countsByUserByType;
   } catch (e) {
     logger.error(e);
-    return false;
+    return null;
   }
 };
 
