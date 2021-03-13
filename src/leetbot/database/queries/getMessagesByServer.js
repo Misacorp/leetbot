@@ -10,9 +10,8 @@ const getMessagesByServer = serverId => {
      JOIN users ON messages.userId = users.id
      WHERE messages.serverId = $serverId`,
   );
-  const result = stmt.all({ serverId });
 
-  return result;
+  return stmt.all({ serverId });
 };
 
 export default getMessagesByServer;

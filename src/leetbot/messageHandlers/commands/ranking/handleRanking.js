@@ -1,6 +1,8 @@
 import ranking from './ranking';
 import { LEET, LEEB, FAILED_LEET } from '../../../../constants/messageTypes';
 import createRankingString from './createRankingString';
+import getMessagesByServerByTime from '../../../database/queries/getMessagesByServerByTime';
+import createTimeRankingString from './createTimeRankingString';
 
 /**
  * Handles a ranking command.
@@ -16,9 +18,17 @@ const handleRanking = (msg, args) => {
   // Handle each type of ranking similarly
   [LEET, LEEB, FAILED_LEET].forEach(type => {
     if (uppercaseArgs.includes(type)) {
-      const ranks = ranking(msg, type);
-      if (ranks) {
-        content = createRankingString(ranks, type, msg.guild);
+      if (uppercaseArgs.includes('FASTEST')) {
+        const ranks = getMessagesByServerByTime(msg.guild.id, type, 'ASC');
+        content = createTimeRankingString(ranks, type, msg.guild, 'fastest');
+      } else if (uppercaseArgs.includes('SLOWEST')) {
+        const ranks = getMessagesByServerByTime(msg.guild.id, type, 'DESC');
+        content = createTimeRankingString(ranks, type, msg.guild, 'slowest');
+      } else {
+        const ranks = ranking(msg, type);
+        if (ranks) {
+          content = createRankingString(ranks, type, msg.guild);
+        }
       }
     }
   });

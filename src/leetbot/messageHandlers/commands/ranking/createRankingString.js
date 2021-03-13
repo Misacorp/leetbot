@@ -1,4 +1,5 @@
 import stripDiscordTag from '../../../util/stripDiscordTag';
+import createRankingIndexString from './createRankingIndexString';
 
 const MAX = 10;
 
@@ -9,17 +10,7 @@ const MAX = 10;
  */
 const createRankingString = (ranks, type, guild) => {
   const ranking = ranks.map((row, index) => {
-    let rankString = `  ${index + 1}. `;
-
-    // Give emoji medals to the top 3 ranks.
-    if (index === 0) {
-      rankString = '🥇';
-    } else if (index === 1) {
-      rankString = '🥈';
-    } else if (index === 2) {
-      rankString = '🥉';
-    }
-
+    const rankString = createRankingIndexString(index);
     return `${rankString} ${stripDiscordTag(row.name)} (${row.counts[type]})`;
   });
 
