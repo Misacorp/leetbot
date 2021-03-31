@@ -1,6 +1,6 @@
 import timeBetween from './util/timeBetween';
-import isLeet from './isLeet';
-import isLeeb from './isLeeb';
+import isLeet from './util/dateTime/isLeet';
+import isLeeb from './util/dateTime/isLeeb';
 
 const MINUTE_BEFORE = 'MINUTE_BEFORE';
 const LEET = 'LEET';

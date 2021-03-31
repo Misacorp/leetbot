@@ -1,4 +1,4 @@
-import timeBetween from './util/timeBetween';
+import timeBetween from '../timeBetween';
 
 /**
  * Returns true if a given time is in the leeb-minute.

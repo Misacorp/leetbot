@@ -1,5 +1,7 @@
 import leetHandler from '../leetHandler';
 import leebHandler from '../leebHandler';
+import isAprilFools from '../../util/dateTime/isAprilFools';
+import emojis from '../../emoji/emojis';
 
 /**
  * Handles phrases to this bot.
@@ -19,13 +21,21 @@ const handleCommands = msg => {
       leetHandler(msg);
       break;
     case '1337':
-      msg.react('🥔');
+      if (isAprilFools(msg.createdAt)) {
+        msg.react(emojis.leet.id);
+      } else {
+        msg.react('🥔');
+      }
       break;
     case 'leeb':
       leebHandler(msg);
       break;
     case '1338':
-      msg.react('🥔');
+      if (isAprilFools(msg.createdAt)) {
+        msg.react(emojis.leeb.id);
+      } else {
+        msg.react('🥔');
+      }
       break;
     case 'winner winner cod dinner':
       msg.react('🐟');

@@ -1,8 +1,8 @@
 import logger from '../../logger';
 
 import validateString from '../util/validators/validateString';
-import isLeet from '../isLeet';
-import isLeeb from '../isLeeb';
+import isLeet from '../util/dateTime/isLeet';
+import isLeeb from '../util/dateTime/isLeeb';
 
 export const messageTypes = ['LEET', 'FAILED_LEET', 'LEEB', 'OTHER'];
 

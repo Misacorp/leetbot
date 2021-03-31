@@ -5,8 +5,9 @@ import parseMessage from '../extractors/parseMessage';
 import addServerUserMessage from '../database/queries/addServerUserMessage';
 import checkDuplicateMessage from './checkDuplicateMessage';
 import checkExistingMessage from './checkExistingMessage';
-import isLeet from '../isLeet';
-import isLeeb from '../isLeeb';
+import isLeet from '../util/dateTime/isLeet';
+import isLeeb from '../util/dateTime/isLeeb';
+import isAprilFools from '../util/dateTime/isAprilFools';
 
 /**
  * Checks if the message was created at 13:38 Finnish time and performs
@@ -24,6 +25,11 @@ const leebHandler = msg => {
   try {
     message.setType('LEEB');
     emoji = emojis.leeb.id;
+
+    if (isAprilFools(msg.createdAt)) {
+      emoji = '🥔';
+    }
+
     logger.info(`User ${user.name} is creating LEEB`);
   } catch (failedLeebErr) {
     // The time does not warrant a LEEB.
