@@ -41,6 +41,10 @@ client.on('message', msg => {
   }
 });
 
+client.on('error', err => {
+  console.warning('Leetbot caught the following client error', err);
+});
+
 client.login(process.env.DISCORD_TOKEN).catch(err => {
   if (!process.env.DISCORD_TOKEN) {
     console.log('Error! Token is undefined');
