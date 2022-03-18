@@ -1,6 +1,6 @@
 import express from 'express';
-import logger from 'morgan';
 import bodyParser from 'body-parser';
+import logger from './logger';
 import dotenv from 'dotenv';
 
 import routes from './leetAPI/routes';
@@ -12,21 +12,14 @@ const app = express();
 app.disable('x-powered-by');
 app.enable('strict-routing');
 
-// View engine setup
-// app.set('views', path.join(__dirname, '../views'));
-// app.set('view engine', 'pug');
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGINS);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-app.use(
-  logger('dev', {
-    skip: () => app.get('env') === 'test',
-  }),
-);
+// TODO: Install express-winston
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -40,10 +33,16 @@ app.use((req, res, next) => {
 app.use('/api', routes);
 
 // Client
-app.use('/', express.static(process.env.CLIENT_PATH));
-app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: process.env.CLIENT_PATH });
-});
+if (process.env.CLIENT_PATH) {
+  app.use('/', express.static(process.env.CLIENT_PATH));
+  app.get('*', (req, res) => {
+    res.sendFile('index.html', { root: process.env.CLIENT_PATH });
+  });
+} else {
+  logger.info(
+    'Client app path not defined in .env file. The client app will not be served but everything else should work.',
+  );
+}
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -12,7 +12,7 @@ import Discord from 'discord.js';
  */
 const parseCommand = (msg, client) => {
   // The bot must be mentioned in a command.
-  if (msg.isMentioned(client.user)) {
+  if (msg.mentions.has(client.user)) {
     const { content } = msg;
     const contentWithoutBotMention = content.replace(Discord.MessageMentions.USERS_PATTERN, '').trim();
 

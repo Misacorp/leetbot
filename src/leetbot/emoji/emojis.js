@@ -1,3 +1,5 @@
+import logger from '../../logger';
+
 const wantedEmojiNames = ['leet', 'leeb'];
 const emojis = {};
 
@@ -8,6 +10,7 @@ const emojis = {};
  *                   and the value is the corresponding emoji object.
  */
 const getEmojis = client => {
+  logger.info(JSON.stringify(client));
   if (Object.keys(emojis).length < 1) {
     client.emojis.forEach(function getEmojiByName(emoji) {
       if (wantedEmojiNames.includes(emoji.name)) {
