@@ -1,4 +1,5 @@
 import timeBetween from '../timeBetween';
+import { DEV } from '../../../constants/config';
 
 /**
  * Returns true if a given date is on april fool's day.
@@ -6,7 +7,7 @@ import timeBetween from '../timeBetween';
  * @returns {boolean} Is the date
  */
 const isAprilFools = (date = new Date()) => {
-  if (process.env.ENV === 'development') {
+  if (DEV) {
     const devAprilFoolsStart = new Date().setSeconds(30);
     const devAprilFoolsEnd = new Date().setSeconds(50);
     return timeBetween(date, devAprilFoolsStart, devAprilFoolsEnd);

@@ -3,12 +3,12 @@ import { POLLER_INTERVAL } from '../../constants/config';
 /**
  * Creates a poller that runs at an interval.
  * @param {number} desiredInterval  Interval between ticks in milliseconds.
- * @param {array}  functions        Functions to call on each tick.
+ * @param {array}  functions        Callback functions to call on each tick.
  * @returns {function} Callback to clear the interval.
  */
-const poller = (desiredInterval, functions = []) => {
-  // Call all functions on start
-  functions.forEach(func => func());
+const poller = (desiredInterval = POLLER_INTERVAL, functions = []) => {
+  // Call all callback functions on start
+  functions.forEach((func) => func());
 
   let interval = desiredInterval;
 
@@ -18,7 +18,7 @@ const poller = (desiredInterval, functions = []) => {
   }
 
   const ticker = setInterval(() => {
-    functions.forEach(func => func());
+    functions.forEach((func) => func());
   }, interval);
 
   return () => clearInterval(ticker);

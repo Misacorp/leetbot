@@ -1,25 +1,23 @@
 import logger from '../../logger';
 
-const wantedEmojiNames = ['leet', 'leeb'];
-const emojis = {};
+const emojis = [];
 
 /**
  * Gets and stores a list of relevant emojis.
  * @param {object} client Discord client.
- * @returns {object} Key-value pairs where the key is an emoji's name
+ * @returns {Object} Key-value pairs where the key is an emoji's name
  *                   and the value is the corresponding emoji object.
  */
-const getEmojis = client => {
-  logger.info(JSON.stringify(client));
-  if (Object.keys(emojis).length < 1) {
-    client.emojis.forEach(function getEmojiByName(emoji) {
-      if (wantedEmojiNames.includes(emoji.name)) {
-        emojis[emoji.name] = emoji;
-      }
-    });
-  }
-  return emojis;
-};
+function getEmojis(client) {
+  logger.info(`Found ${client.emojis.cache.size} emojis`);
+
+  // Add emojis to the emoji store
+  client.emojis.cache.forEach((emoji) => {
+    emojis.push(emoji);
+  });
+
+  return client.emojis.cache;
+}
 
 export default emojis;
 export { getEmojis };

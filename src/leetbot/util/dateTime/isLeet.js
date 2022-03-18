@@ -1,4 +1,5 @@
 import timeBetween from '../timeBetween';
+import { DEV } from '../../../constants/config';
 
 /**
  * Returns true if a given time is in the leet-minute.
@@ -7,7 +8,7 @@ import timeBetween from '../timeBetween';
  */
 const isLeet = (time = new Date()) => {
   // In dev mode leet is between the 20th and 40th second of each minute.
-  if (process.env.ENV === 'development') {
+  if (DEV) {
     const devLeetStart = new Date().setSeconds(20);
     const devLeetEnd = new Date().setSeconds(40);
     return timeBetween(time, devLeetStart, devLeetEnd);

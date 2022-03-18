@@ -11,16 +11,14 @@ import emojis from './emoji/emojis';
  * @returns {boolean} Was the emoji handled successfully?
  */
 const handleEmoji = (msg, emojiName, handler) => {
-  if (msg && Object.prototype.hasOwnProperty.call(msg, 'content')) {
-    if (emojis && Object.prototype.hasOwnProperty.call(emojis, emojiName)) {
-      if (containsEmoji(msg, emojis[emojiName])) {
-        return handler(msg);
-      }
-    } else {
-      logger.warn(`No emoji with the name ${emojiName} was found.`);
+  const wantedEmoji = emojis.find((emoji) => emoji.name === emojiName);
+
+  if (wantedEmoji) {
+    if (containsEmoji(msg, wantedEmoji)) {
+      return handler(msg);
     }
   } else {
-    logger.warn(`Message has no content.`);
+    logger.info('No emoji found with the name', emojiName);
   }
 
   return false;

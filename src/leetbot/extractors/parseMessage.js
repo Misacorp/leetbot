@@ -11,13 +11,14 @@ import Message from '../classes/Message';
 const parseMessage = (msg, type) => {
   // Get server.
   const { guild } = msg;
-  const { id: serverId, name: serverName, iconURL: serverIconUrl } = guild;
-  const server = new Server(serverId, serverName, serverIconUrl);
+  const { id: serverId, name: serverName } = guild;
+
+  const server = new Server(serverId, serverName, guild.iconURL());
 
   // Get user.
   const { author } = msg;
-  const { id: userId, tag, displayAvatarURL } = author;
-  const user = new User(userId, tag, displayAvatarURL);
+  const { id: userId, tag } = author;
+  const user = new User(userId, tag, author.displayAvatarURL());
 
   // Get message.
   const message = new Message({

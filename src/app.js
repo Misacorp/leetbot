@@ -1,19 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import logger from './logger';
 import dotenv from 'dotenv';
+import logger from './logger';
 
 import routes from './leetAPI/routes';
-
-// Load env variables to process.env
-dotenv.config();
+import { ALLOWED_ORIGINS, CLIENT_PATH } from './constants/config';
 
 const app = express();
 app.disable('x-powered-by');
 app.enable('strict-routing');
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGINS);
+  res.header('Access-Control-Allow-Origin', ALLOWED_ORIGINS);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -33,10 +31,10 @@ app.use((req, res, next) => {
 app.use('/api', routes);
 
 // Client
-if (process.env.CLIENT_PATH) {
-  app.use('/', express.static(process.env.CLIENT_PATH));
+if (CLIENT_PATH) {
+  app.use('/', express.static(CLIENT_PATH));
   app.get('*', (req, res) => {
-    res.sendFile('index.html', { root: process.env.CLIENT_PATH });
+    res.sendFile('index.html', { root: CLIENT_PATH });
   });
 } else {
   logger.info(

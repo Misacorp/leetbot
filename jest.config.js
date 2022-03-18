@@ -1,3 +1,3 @@
-module.exports = () => {
-  process.env.TZ = 'UTC';
+module.exports = {
+  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js'],
 };

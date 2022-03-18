@@ -1,5 +1,6 @@
 import appRoot from 'app-root-path';
 import { createLogger, format, transports } from 'winston';
+import { PROD } from './constants/config';
 
 const LOGS_PATH = `${appRoot}/logs`;
 
@@ -26,7 +27,7 @@ const logger = createLogger({
 // If we're not in production then **ALSO** log to the `console`
 // with the colorized simple format.
 //
-if (process.env.ENV !== 'production') {
+if (!PROD) {
   logger.add(
     new transports.Console({
       format: format.combine(format.colorize(), format.simple()),

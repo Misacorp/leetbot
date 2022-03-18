@@ -23,7 +23,7 @@ const createRankingString = (ranks, type, guild) => {
   }
 
   // Add a link to the full stats
-  rankingString = `${rankingString}\nView the full ranking at ${process.env.CLIENT_URL}/servers/${guild.id}`;
+  rankingString = `${rankingString}\nView the full ranking at ${CLIENT_URL}/servers/${guild.id}`;
 
   return rankingString;
 };

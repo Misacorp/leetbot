@@ -3,24 +3,19 @@ import parseMessage from '../extractors/parseMessage';
 import addServer from '../database/queries/addServer';
 import addUser from '../database/queries/addUser';
 import addMessage from '../database/queries/addMessage';
-// import checkDuplicateMessage from './checkDuplicateMessage';
-
-const useDebugHandler = process.env.ENV === 'development';
+import { DEV } from '../../constants/config';
 
 /**
  * Used for testing and debugging messages.
  * @param {object} msg Discord message object.
  */
-const debugHandler = msg => {
-  if (useDebugHandler && msg.channel.name === 'bot') {
+const debugHandler = (msg) => {
+  if (DEV && msg.channel.name === 'bot') {
     // Extract objects
     const { server, user, message } = parseMessage(msg, 'OTHER');
 
     // Add rows to database tables.
     try {
-      // Does a message of the created type already exist on this server today?
-      // const alreadyExists = checkDuplicateMessage(server, user, message);
-
       addServer(server);
       addUser(user);
       addMessage(message);

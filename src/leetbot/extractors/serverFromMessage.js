@@ -5,11 +5,11 @@ import Server from '../classes/Server';
  * @param {object} msg Discord.js message object.
  * @returns {Server} Server object representing the server to which the message was sent to.
  */
-const serverFromMessage = msg => {
+const serverFromMessage = (msg) => {
   const { guild } = msg;
-  const { id: serverId, name: serverName, iconURL: serverIconUrl } = guild;
+  const { id, name, iconUrl } = guild;
 
-  return new Server(serverId, serverName, serverIconUrl);
+  return new Server(id, name, iconUrl());
 };
 
 export default serverFromMessage;
