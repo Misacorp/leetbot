@@ -1,6 +1,6 @@
 import appRoot from 'app-root-path';
 import { createLogger, format, transports } from 'winston';
-import { PROD } from './constants/config';
+import { PROD, TEST } from './constants/config';
 
 const LOGS_PATH = `${appRoot}/logs`;
 
@@ -30,6 +30,7 @@ const logger = createLogger({
 if (!PROD) {
   logger.add(
     new transports.Console({
+      level: TEST ? 'error' : 'info',
       format: format.combine(format.colorize(), format.simple()),
     }),
   );

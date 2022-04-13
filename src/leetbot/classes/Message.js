@@ -29,7 +29,7 @@ class Message {
       validateString(serverId, 8);
       this.serverId = serverId;
     } catch (e) {
-      logger.error(e);
+      logger.warn(e);
       throw e;
     }
 

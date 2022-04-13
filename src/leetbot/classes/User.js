@@ -1,4 +1,5 @@
 import validateString from '../util/validators/validateString';
+import logger from '../../logger';
 
 /**
  * Represents a Discord user.
@@ -13,7 +14,7 @@ class User {
       validateString(id, 8);
       this.id = id;
     } catch (e) {
-      console.warn('The following error occurred when validating a User id');
+      logger.warn('The following error occurred when validating a User id');
       throw e;
     }
 
@@ -21,7 +22,7 @@ class User {
       validateString(name, 1);
       this.name = name;
     } catch (e) {
-      console.warn('The following error occurred when validating a User name');
+      logger.warn('The following error occurred when validating a User name');
       throw e;
     }
 
